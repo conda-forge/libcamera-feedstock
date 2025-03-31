@@ -21,7 +21,7 @@ docker_image:
 gstreamer:
 - '1.24'
 libboost_devel:
-- '1.84'
+- '1.86'
 libevent:
 - 2.1.12
 libjpeg_turbo:
