@@ -31,9 +31,9 @@ source:
 build:
   number: {{ build }}
   skip: true  # [not linux]
-  {% if variant == "rpi_fork" %}
+{% if variant == "rpi_fork" %}
   skip: true  # [not aarch64]
-  {% endif %}
+{% endif %}
   string: "py{{ CONDA_PY }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}_{{ variant }}"
 
 requirements:
@@ -99,6 +99,7 @@ outputs:
         - libglib
         - glib
         - gst-plugins-base
+        - {{ pin_subpackage('libcamera', exact=True) }}
       run:
         - python
         # I wish we could pin exact... but I think with the python build matrix
