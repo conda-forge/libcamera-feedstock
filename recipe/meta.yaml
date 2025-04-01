@@ -96,6 +96,7 @@ outputs:
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
       host:
         - python
+        - gst-plugins-base
       run:
         - python
         # I wish we could pin exact... but I think with the python build matrix
