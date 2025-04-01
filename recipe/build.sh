@@ -3,7 +3,7 @@ set -xeo pipefail
 
 rm -f subprojects/gtest.wrap
 EXTRA_MESON_ARGS=""
-if [[ ${variant} == "rpi" ]]; then
+if [[ ${variant} == "rpi_fork" ]]; then
   EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dpycamera=enabled"
   EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dpipelines=rpi/vc4,rpi/pisp"
   EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dipas=rpi/vc4,rpi/pisp"
