@@ -60,6 +60,9 @@ requirements:
     - libudev
     - libudev1
     - gstreamer
+    - libglib
+    - glib
+    - gst-plugins-base
     - libevent
     - libdrm
     - libtiff
@@ -96,9 +99,6 @@ outputs:
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
       host:
         - python
-        - libglib
-        - glib
-        - gst-plugins-base
         - {{ pin_subpackage('libcamera', exact=True) }}
       run:
         - python
