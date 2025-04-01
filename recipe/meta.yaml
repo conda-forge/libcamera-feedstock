@@ -99,7 +99,6 @@ outputs:
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
       host:
         - python
-        - {{ pin_subpackage('libcamera', exact=True) }}
       run:
         - python
         # I wish we could pin exact... but I think with the python build matrix
