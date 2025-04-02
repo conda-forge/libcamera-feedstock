@@ -80,17 +80,16 @@ requirements:
     - python
 test:
   commands:
+    - cam -l
     - test -f $PREFIX/lib/libcamera.so
     - test -f $PREFIX/include/libcamera/libcamera/libcamera.h
 
 outputs:
   - name: libcamera
-    test:
-      commands:
-        - cam -l
   - name: libcamera-rpi
     build:
-      skip: true   # [variant == "upstream"]
+      # unskip for rpi fork after we debug
+      skip: true
       string: "py{{ CONDA_PY }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}_{{ variant }}"
     requirements:
       # Add python as build/host dependency to get the full python matrix out of this.
