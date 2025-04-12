@@ -129,7 +129,6 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libcamera-green.svg)](https://anaconda.org/conda-forge/libcamera) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libcamera.svg)](https://anaconda.org/conda-forge/libcamera) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libcamera.svg)](https://anaconda.org/conda-forge/libcamera) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libcamera.svg)](https://anaconda.org/conda-forge/libcamera) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-libcamera--rpi-green.svg)](https://anaconda.org/conda-forge/libcamera-rpi) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libcamera-rpi.svg)](https://anaconda.org/conda-forge/libcamera-rpi) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libcamera-rpi.svg)](https://anaconda.org/conda-forge/libcamera-rpi) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libcamera-rpi.svg)](https://anaconda.org/conda-forge/libcamera-rpi) |
 
 Installing libcamera
 ====================
@@ -141,16 +140,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `libcamera, libcamera-rpi` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `libcamera` can be installed with `conda`:
 
 ```
-conda install libcamera libcamera-rpi
+conda install libcamera
 ```
 
 or with `mamba`:
 
 ```
-mamba install libcamera libcamera-rpi
+mamba install libcamera
 ```
 
 It is possible to list all of the versions of `libcamera` available on your platform with `conda`:
