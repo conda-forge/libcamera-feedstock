@@ -80,10 +80,9 @@ requirements:
     - python
 test:
   commands:
-    - cam --help  # [variant == "upstream"]
+    - cam -l  # [variant == "upstream"]
     - test -f $PREFIX/lib/libcamera.so
     - test -f $PREFIX/include/libcamera/libcamera/libcamera.h
-    - cam -l   # [variant == "upstream"]
 
 outputs:
   - name: libcamera
