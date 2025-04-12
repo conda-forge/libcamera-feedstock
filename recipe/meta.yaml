@@ -82,12 +82,10 @@ test:
   commands:
     - test -f $PREFIX/lib/libcamera.so
     - test -f $PREFIX/include/libcamera/libcamera/libcamera.h
+    - cam -l   # [variant == "upstream"]
 
 outputs:
   - name: libcamera
-    test:
-      commands:
-        - cam -l
   - name: libcamera-rpi
     build:
       # unskip for rpi fork after we debug
