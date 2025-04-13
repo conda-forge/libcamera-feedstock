@@ -81,7 +81,8 @@ requirements:
     - python
 test:
   commands:
-    - cam -l
+    # command only available in the upstream fork
+    - cam -l  # [variant == "upstream"]
     - test -f $PREFIX/lib/libcamera.so
     - test -f $PREFIX/include/libcamera/libcamera/libcamera.h
     # command only available in the rpi fork
