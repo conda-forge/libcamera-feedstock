@@ -27,10 +27,8 @@ source:
 {% endif %}
   patches:
     - memfd_symbols.patch
-{% if variant == "rpi_fork" %}
     # When cross compiling it is important to specify this to help find libevent
     - 0001-Specify-to-use-the-prefix-include-directory-to-help-.patch
-{% endif %}
 
 build:
   number: {{ build }}
