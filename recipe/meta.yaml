@@ -76,18 +76,22 @@ requirements:
     - libboost-devel
     - pyyaml
     - ply
+    - libpisp   # [variant != "rpi_fork"]
   run:
     - python
 test:
   commands:
-    - cam -l  # [variant == "upstream"]
+    - cam -l
     - test -f $PREFIX/lib/libcamera.so
     - test -f $PREFIX/include/libcamera/libcamera/libcamera.h
+    # command only available in the rpi fork
+    - libcamerify --help  # [variant == "rpi_fork"]
 
 outputs:
   - name: libcamera
   - name: libcamera-rpi
     build:
+      skip: true  # [variant == "rpi_fork"]
       string: "py{{ CONDA_PY }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}_{{ variant }}"
     requirements:
       # Add python as build/host dependency to get the full python matrix out of this.
@@ -97,14 +101,10 @@ outputs:
       host:
         - python
       run:
-        - python
         # I wish we could pin exact... but I think with the python build matrix
         # It makes things complicated.
-        # - libcamera {{ libcamera_version }} *_{{ PKG_BUILDNUM }}_{{ variant }}
-        - {{ pin_subpackage('libcamera', exact=True) }}
-    test:
-      commands:
-        - libcamerify --help
+        - libcamera {{ libcamera_version }} *_{{ PKG_BUILDNUM }}_{{ variant }}
+        # - {{ pin_subpackage('libcamera', exact=True) }}
 
 
 about:
