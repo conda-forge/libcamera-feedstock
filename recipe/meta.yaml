@@ -86,7 +86,7 @@ test:
     - test -f $PREFIX/lib/libcamera.so
     - test -f $PREFIX/include/libcamera/libcamera/libcamera.h
     # command only available in the rpi fork
-    - libcamerify --help  # [variant == "rpi_fork"]
+    - libcamerify -h  # [variant == "rpi_fork"]
 
 outputs:
   - name: libcamera
