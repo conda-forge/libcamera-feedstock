@@ -7,9 +7,7 @@ EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dgstreamer=enabled"
 EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dtest=false"
 EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dcam=enabled"
 EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dpycamera=enabled"
-if [[ "${target_platform}" == linux-* ]]; then
-  EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dv4l2=true"
-fi
+EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dv4l2=true"
 if [[ ${variant} == "rpi_fork" ]]; then
   EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dpipelines=rpi/vc4,rpi/pisp"
   EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dipas=rpi/vc4,rpi/pisp"

@@ -86,7 +86,9 @@ requirements:
 test:
   commands:
     - cam -l
-    - qcam -h
+    # testing this with qcam -h would require the full X environment
+    # too much for a quick test
+    - which qcam
     - test -f $PREFIX/lib/libcamera.so
     - test -f $PREFIX/include/libcamera/libcamera/libcamera.h
     # libcamerify is a V4L2 camera wrapper for libcamera
