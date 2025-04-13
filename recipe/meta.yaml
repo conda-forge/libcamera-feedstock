@@ -91,7 +91,7 @@ outputs:
   - name: libcamera
   - name: libcamera-rpi
     build:
-      skip: true  # [variant == "rpi_fork"]
+      skip: true  # [variant == "upstream"]
       string: "py{{ CONDA_PY }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}_{{ variant }}"
     requirements:
       # Add python as build/host dependency to get the full python matrix out of this.
