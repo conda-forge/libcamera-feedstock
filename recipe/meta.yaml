@@ -28,8 +28,8 @@ source:
   patches:
     - memfd_symbols.patch
 {% if variant == "rpi_fork" %}
-    - rpi_fork/0001-Specify-to-use-the-prefix-include-directory-to-help-.patch
-    - rpi_fork/43_mark_possibly_unused.patch
+    # When cross compiling it is important to specify this to help find libevent
+    - 0001-Specify-to-use-the-prefix-include-directory-to-help-.patch
 {% endif %}
 
 build:
@@ -87,8 +87,7 @@ requirements:
     - python
 test:
   commands:
-    # command only available in the upstream fork
-    - cam -l  # [variant == "upstream"]
+    - cam -l
     - test -f $PREFIX/lib/libcamera.so
     - test -f $PREFIX/include/libcamera/libcamera/libcamera.h
     # command only available in the rpi fork
@@ -96,15 +95,15 @@ test:
 
 outputs:
   - name: libcamera
-  # - name: libcamera-rpi
-  #   build:
-  #     skip: true  # [variant == "upstream"]
-  #     string: "h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}_{{ variant }}"
-  #   requirements:
-  #     run:
-  #       # I wish we could pin exact... but I think with the python build matrix
-  #       # It makes things complicated.
-  #       - libcamera {{ libcamera_version }} *_{{ PKG_BUILDNUM }}_{{ variant }}
+  - name: libcamera-rpi
+    build:
+      skip: true  # [variant == "upstream"]
+      string: "h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}_{{ variant }}"
+    requirements:
+      run:
+        # I wish we could pin exact... but I think with the python build matrix
+        # It makes things complicated.
+        - libcamera {{ libcamera_version }} *_{{ PKG_BUILDNUM }}_{{ variant }}
 
 about:
   home: https://libcamera.org/index.html

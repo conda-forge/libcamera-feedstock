@@ -7,7 +7,7 @@ EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dgstreamer=enabled"
 EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dtest=false"
 EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dcam=enabled"
 EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dpycamera=enabled"
-if [[ ${target_platform} == "linux-*" ]]; then
+if [[ "${target_platform}" == linux-* ]]; then
   EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dv4l2=true"
 fi
 if [[ ${variant} == "rpi_fork" ]]; then
