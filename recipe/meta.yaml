@@ -27,6 +27,10 @@ source:
 {% endif %}
   patches:
     - memfd_symbols.patch
+{% if variant == "rpi_fork" %}
+    - rpi_fork/0001-Specify-to-use-the-prefix-include-directory-to-help-.patch
+    - rpi_fork/43_mark_possibly_unused.patch
+{% endif %}
 
 build:
   number: {{ build }}
@@ -76,7 +80,9 @@ requirements:
     - libboost-devel
     - pyyaml
     - ply
-    - libpisp   # [variant == "rpi_fork"]
+    - libpisp        # [variant == "rpi_fork"]
+    # libpisp build dependency
+    - nlohmann_json  # [variant == "rpi_fork"]
   run:
     - python
 test:
@@ -90,15 +96,15 @@ test:
 
 outputs:
   - name: libcamera
-  - name: libcamera-rpi
-    build:
-      skip: true  # [variant == "upstream"]
-      string: "h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}_{{ variant }}"
-    requirements:
-      run:
-        # I wish we could pin exact... but I think with the python build matrix
-        # It makes things complicated.
-        - libcamera {{ libcamera_version }} *_{{ PKG_BUILDNUM }}_{{ variant }}
+  # - name: libcamera-rpi
+  #   build:
+  #     skip: true  # [variant == "upstream"]
+  #     string: "h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}_{{ variant }}"
+  #   requirements:
+  #     run:
+  #       # I wish we could pin exact... but I think with the python build matrix
+  #       # It makes things complicated.
+  #       - libcamera {{ libcamera_version }} *_{{ PKG_BUILDNUM }}_{{ variant }}
 
 about:
   home: https://libcamera.org/index.html
