@@ -80,7 +80,7 @@ requirements:
     - ply
     - libpisp        # [variant == "rpi_fork"]
     # libpisp build dependency
-    - nlohmann_json  # [variant == "rpi_fork"]
+    # - nlohmann_json  # [variant == "rpi_fork"]
   run:
     - python
 test:
