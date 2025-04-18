@@ -27,13 +27,15 @@ source:
 {% endif %}
   patches:
     - memfd_symbols.patch
+    # When cross compiling it is important to specify this to help find libevent
+    - 0001-Specify-to-use-the-prefix-include-directory-to-help-.patch
 
 build:
   number: {{ build }}
   skip: true  # [not linux]
-  {% if variant == "rpi_fork" %}
+{% if variant == "rpi_fork" %}
   skip: true  # [not aarch64]
-  {% endif %}
+{% endif %}
   string: "py{{ CONDA_PY }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}_{{ variant }}"
 
 requirements:
@@ -60,6 +62,9 @@ requirements:
     - libudev
     - libudev1
     - gstreamer
+    - libglib
+    - glib
+    - gst-plugins-base
     - libevent
     - libdrm
     - libtiff
@@ -73,39 +78,33 @@ requirements:
     - libboost-devel
     - pyyaml
     - ply
+    - libpisp        # [variant == "rpi_fork"]
+    # libpisp build dependency
+    - nlohmann_json  # [variant == "rpi_fork"]
   run:
     - python
 test:
   commands:
+    - cam -l
+    # testing this with qcam -h would require the full X environment
+    # too much for a quick test
+    - which qcam
     - test -f $PREFIX/lib/libcamera.so
     - test -f $PREFIX/include/libcamera/libcamera/libcamera.h
+    # libcamerify is a V4L2 camera wrapper for libcamera
+    - libcamerify -h  # [unix]
 
 outputs:
   - name: libcamera
-    test:
-      commands:
-        - cam -l
   - name: libcamera-rpi
     build:
-      skip: true   # [variant == "upstream"]
-      string: "py{{ CONDA_PY }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}_{{ variant }}"
+      skip: true  # [variant == "upstream"]
+      string: "h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}_{{ variant }}"
     requirements:
-      # Add python as build/host dependency to get the full python matrix out of this.
-      build:
-        - python                                 # [build_platform != target_platform]
-        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-      host:
-        - python
       run:
-        - python
         # I wish we could pin exact... but I think with the python build matrix
         # It makes things complicated.
-        # - libcamera {{ libcamera_version }} *_{{ PKG_BUILDNUM }}_{{ variant }}
-        - {{ pin_subpackage('libcamera', exact=True) }}
-    test:
-      commands:
-        - libcamerify --help
-
+        - libcamera {{ libcamera_version }} *_{{ PKG_BUILDNUM }}_{{ variant }}
 
 about:
   home: https://libcamera.org/index.html

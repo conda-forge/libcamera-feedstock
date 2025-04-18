@@ -53,10 +53,87 @@ Current build status
                 </a>
               </td>
             </tr><tr>
+              <td>linux_64_python3.13.____cp313variantupstream</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=25302&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libcamera-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.13.____cp313variantupstream" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
               <td>linux_64_python3.9.____cpythonvariantupstream</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=25302&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libcamera-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.9.____cpythonvariantupstream" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_python3.10.____cpythonvariantrpi_fork</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=25302&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libcamera-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.10.____cpythonvariantrpi_fork" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_python3.10.____cpythonvariantupstream</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=25302&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libcamera-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.10.____cpythonvariantupstream" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_python3.11.____cpythonvariantrpi_fork</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=25302&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libcamera-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.11.____cpythonvariantrpi_fork" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_python3.11.____cpythonvariantupstream</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=25302&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libcamera-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.11.____cpythonvariantupstream" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_python3.12.____cpythonvariantrpi_fork</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=25302&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libcamera-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.12.____cpythonvariantrpi_fork" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_python3.12.____cpythonvariantupstream</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=25302&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libcamera-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.12.____cpythonvariantupstream" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_python3.13.____cp313variantrpi_fork</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=25302&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libcamera-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.13.____cp313variantrpi_fork" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_python3.13.____cp313variantupstream</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=25302&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libcamera-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.13.____cp313variantupstream" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_python3.9.____cpythonvariantrpi_fork</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=25302&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libcamera-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.9.____cpythonvariantrpi_fork" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_python3.9.____cpythonvariantupstream</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=25302&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libcamera-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.9.____cpythonvariantupstream" alt="variant">
                 </a>
               </td>
             </tr>
@@ -73,6 +150,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libcamera-green.svg)](https://anaconda.org/conda-forge/libcamera) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libcamera.svg)](https://anaconda.org/conda-forge/libcamera) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libcamera.svg)](https://anaconda.org/conda-forge/libcamera) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libcamera.svg)](https://anaconda.org/conda-forge/libcamera) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libcamera--rpi-green.svg)](https://anaconda.org/conda-forge/libcamera-rpi) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libcamera-rpi.svg)](https://anaconda.org/conda-forge/libcamera-rpi) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libcamera-rpi.svg)](https://anaconda.org/conda-forge/libcamera-rpi) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libcamera-rpi.svg)](https://anaconda.org/conda-forge/libcamera-rpi) |
 
 Installing libcamera
 ====================
@@ -84,16 +162,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `libcamera` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `libcamera, libcamera-rpi` can be installed with `conda`:
 
 ```
-conda install libcamera
+conda install libcamera libcamera-rpi
 ```
 
 or with `mamba`:
 
 ```
-mamba install libcamera
+mamba install libcamera libcamera-rpi
 ```
 
 It is possible to list all of the versions of `libcamera` available on your platform with `conda`:

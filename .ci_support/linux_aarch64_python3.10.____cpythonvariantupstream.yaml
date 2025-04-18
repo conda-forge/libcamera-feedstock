@@ -25,7 +25,7 @@ gst_plugins_base:
 gstreamer:
 - '1.24'
 libboost_devel:
-- '1.86'
+- '1.84'
 libevent:
 - 2.1.12
 libjpeg_turbo:
@@ -47,7 +47,7 @@ qt6_main:
 sdl2:
 - '2'
 target_platform:
-- linux-64
+- linux-aarch64
 variant:
 - upstream
 zip_keys:

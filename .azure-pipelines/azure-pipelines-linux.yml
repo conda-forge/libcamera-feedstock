@@ -20,8 +20,52 @@ jobs:
         CONFIG: linux_64_python3.12.____cpythonvariantupstream
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      linux_64_python3.13.____cp313variantupstream:
+        CONFIG: linux_64_python3.13.____cp313variantupstream
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
       linux_64_python3.9.____cpythonvariantupstream:
         CONFIG: linux_64_python3.9.____cpythonvariantupstream
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      linux_aarch64_python3.10.____cpythonvariantrpi_fork:
+        CONFIG: linux_aarch64_python3.10.____cpythonvariantrpi_fork
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      linux_aarch64_python3.10.____cpythonvariantupstream:
+        CONFIG: linux_aarch64_python3.10.____cpythonvariantupstream
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      linux_aarch64_python3.11.____cpythonvariantrpi_fork:
+        CONFIG: linux_aarch64_python3.11.____cpythonvariantrpi_fork
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      linux_aarch64_python3.11.____cpythonvariantupstream:
+        CONFIG: linux_aarch64_python3.11.____cpythonvariantupstream
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      linux_aarch64_python3.12.____cpythonvariantrpi_fork:
+        CONFIG: linux_aarch64_python3.12.____cpythonvariantrpi_fork
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      linux_aarch64_python3.12.____cpythonvariantupstream:
+        CONFIG: linux_aarch64_python3.12.____cpythonvariantupstream
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      linux_aarch64_python3.13.____cp313variantrpi_fork:
+        CONFIG: linux_aarch64_python3.13.____cp313variantrpi_fork
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      linux_aarch64_python3.13.____cp313variantupstream:
+        CONFIG: linux_aarch64_python3.13.____cp313variantupstream
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      linux_aarch64_python3.9.____cpythonvariantrpi_fork:
+        CONFIG: linux_aarch64_python3.9.____cpythonvariantrpi_fork
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      linux_aarch64_python3.9.____cpythonvariantupstream:
+        CONFIG: linux_aarch64_python3.9.____cpythonvariantupstream
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
   timeoutInMinutes: 360

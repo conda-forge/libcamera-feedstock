@@ -1,0 +1,27 @@
+From 27eb0ec625d9cb49611ee7fa15f7874096ac472a Mon Sep 17 00:00:00 2001
+From: Mark Harfouche <mark.harfouche@gmail.com>
+Date: Sun, 13 Apr 2025 16:39:17 -0400
+Subject: [PATCH] Specify to use the prefix include directory to help find
+ event2
+
+---
+ src/apps/common/meson.build | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/src/apps/common/meson.build b/src/apps/common/meson.build
+index 5b68339..79b99db 100644
+--- a/src/apps/common/meson.build
++++ b/src/apps/common/meson.build
+@@ -22,6 +22,9 @@ if libtiff.found()
+     ])
+ endif
+ 
++incdir = include_directories(join_paths(get_option('prefix'), 'include'))
++
+ apps_lib = static_library('apps', apps_sources,
++                          include_directories : incdir,
+                           cpp_args : apps_cpp_args,
+                           dependencies : [libcamera_public])
+-- 
+2.48.1
+
