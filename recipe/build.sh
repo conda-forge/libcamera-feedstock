@@ -9,6 +9,7 @@ EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dcam=enabled"
 EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dqcam=enabled"
 EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dpycamera=enabled"
 EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dv4l2=true"
+EXTRA_MESON_ARGS="${EXTRA_MESON_ARGS} -Dwerror=false"
 if [[ ${variant} == "rpi_fork" ]]; then
   # Make sure we build the standard pipeline and ipas contained in the upstream build
   # in ADDITION to the rpi/pisp ones
