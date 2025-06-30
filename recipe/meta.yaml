@@ -29,7 +29,6 @@ source:
     - memfd_symbols.patch
     # When cross compiling it is important to specify this to help find libevent
     - 0001-Specify-to-use-the-prefix-include-directory-to-help-.patch
-    - 0002-bump-libpisp-to-1-2-1.patch
 
 build:
   number: {{ build }}
@@ -82,9 +81,9 @@ requirements:
     - libboost-devel
     - pyyaml
     - ply
-    - libpisp        # [variant == "rpi_fork"]
+    - libpisp
     # libpisp build dependency
-    - nlohmann_json  # [variant == "rpi_fork"]
+    - nlohmann_json
   run:
     - python
 test:
