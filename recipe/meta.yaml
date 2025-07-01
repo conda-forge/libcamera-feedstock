@@ -1,7 +1,7 @@
-{% set libcamera_version = "0.4.0" %}
-{% set libcamera_rpi_version = "0.4.0+rpt20250213" %}
+{% set libcamera_version = "0.5.0" %}
+{% set libcamera_rpi_version = "0.5.0+rpt20250429" %}
 {% set rpi_url_safe_version = libcamera_rpi_version | urlencode %}
-{% set build = 2 %}
+{% set build = 0 %}
 
 {% if variant == "upstream" %}
   # install upstream variant by dafault
@@ -23,7 +23,7 @@ source:
   # We found that they attempt to maintain ABI compatibility
   # Thus we build Raspberry-Pi specific modifications as as a variant instead of a separate package
   url: https://github.com/raspberrypi/libcamera/releases/download/v{{ rpi_url_safe_version }}/libcamera-{{ rpi_url_safe_version }}.tar.xz
-  sha256: 764b9b2ab16dbc4e90cd858cd2019be76e087e093bbdd08048d87d0a704f8e28
+  sha256: a5c574076eeac207dec65b78e68c307f6314cd3ea135dee83558a29f3beffe0d
 {% endif %}
   patches:
     - memfd_symbols.patch
@@ -37,6 +37,9 @@ build:
   skip: true  # [not aarch64]
 {% endif %}
   string: "py{{ CONDA_PY }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}_{{ variant }}"
+  run_exports:
+    # see https://git.libcamera.org/libcamera/libcamera.git/tree/meson.build?h=v0.5.1#n65
+    - {{ pin_subpackage('libcamera', max_pin='x.x') }}
 
 requirements:
   build:
@@ -78,9 +81,9 @@ requirements:
     - libboost-devel
     - pyyaml
     - ply
-    - libpisp        # [variant == "rpi_fork"]
+    - libpisp
     # libpisp build dependency
-    - nlohmann_json  # [variant == "rpi_fork"]
+    - nlohmann_json
   run:
     - python
 test:
