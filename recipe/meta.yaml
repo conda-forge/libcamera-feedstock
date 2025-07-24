@@ -1,5 +1,5 @@
-{% set libcamera_version = "0.5.0" %}
-{% set libcamera_rpi_version = "0.5.0+rpt20250429" %}
+{% set libcamera_version = "0.5.1" %}
+{% set libcamera_rpi_version = "0.5.1+rpt20250722" %}
 {% set rpi_url_safe_version = libcamera_rpi_version | urlencode %}
 {% set build = 2 %}
 
@@ -23,7 +23,7 @@ source:
   # We found that they attempt to maintain ABI compatibility
   # Thus we build Raspberry-Pi specific modifications as as a variant instead of a separate package
   url: https://github.com/raspberrypi/libcamera/releases/download/v{{ rpi_url_safe_version }}/libcamera-{{ rpi_url_safe_version }}.tar.xz
-  sha256: a5c574076eeac207dec65b78e68c307f6314cd3ea135dee83558a29f3beffe0d
+  sha256: 5d6726e85b7385d8942f45746555d64142e5161b5ba67e0a315a535773c84718
 {% endif %}
   patches:
     - memfd_symbols.patch
