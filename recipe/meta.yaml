@@ -1,7 +1,7 @@
 {% set libcamera_version = "0.5.1" %}
 {% set libcamera_rpi_version = "0.5.1+rpt20250722" %}
 {% set rpi_url_safe_version = libcamera_rpi_version | urlencode %}
-{% set build = 3 %}
+{% set build = 4 %}
 
 {% if variant == "upstream" %}
   # install upstream variant by dafault
