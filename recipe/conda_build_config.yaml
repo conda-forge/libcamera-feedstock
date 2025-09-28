@@ -3,4 +3,4 @@ variant:
   - rpi_fork
 
 c_stdlib_version:  # [linux]
-  - 2.28           # [linux]
+  - 2.34           # [linux]
