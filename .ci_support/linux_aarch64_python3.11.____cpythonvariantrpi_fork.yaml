@@ -6,8 +6,6 @@ c_stdlib:
 - sysroot
 c_stdlib_version:
 - '2.34'
-cdt_name:
-- conda
 channel_sources:
 - conda-forge
 channel_targets:
@@ -32,10 +30,12 @@ libjpeg_turbo:
 - '3'
 libtiff:
 - '4.7'
+libudev:
+- '257'
 libunwind:
 - '1.8'
 openssl:
-- '3'
+- '3.5'
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -43,7 +43,7 @@ pin_run_as_build:
 python:
 - 3.11.* *_cpython
 qt6_main:
-- '6.9'
+- '6.10'
 sdl2:
 - '2'
 target_platform:
@@ -53,5 +53,3 @@ variant:
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
-- - python
-  - channel_sources
