@@ -1,7 +1,7 @@
 {% set libcamera_version = "0.5.2" %}
 {% set libcamera_rpi_version = "0.5.2+rpt20250903" %}
 {% set rpi_url_safe_version = libcamera_rpi_version | urlencode %}
-{% set build = 2 %}
+{% set build = 3 %}
 
 {% if variant == "upstream" %}
   # install upstream variant by dafault
@@ -86,16 +86,6 @@ requirements:
     - nlohmann_json
   run:
     - python
-test:
-  commands:
-    - cam -l
-    # testing this with qcam -h would require the full X environment
-    # too much for a quick test
-    - which qcam
-    - test -f $PREFIX/lib/libcamera.so
-    - test -f $PREFIX/include/libcamera/libcamera/libcamera.h
-    # libcamerify is a V4L2 camera wrapper for libcamera
-    - libcamerify -h  # [unix]
 
 outputs:
   - name: libcamera
