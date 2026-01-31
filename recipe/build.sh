@@ -30,7 +30,7 @@ ninja -C build install
 # IPA module binaries, which invalidates their cryptographic signatures.
 # We must re-sign them after these modifications.
 
-PRIV_KEY="${SRC_DIR}/build/src/ipa/ipa-priv-key.pem"
+PRIV_KEY="${SRC_DIR}/build/src/ipa-priv-key.pem"
 SIGN_SCRIPT="${SRC_DIR}/src/ipa/ipa-sign.sh"
 
 if [ -f "$PRIV_KEY" ] && [ -f "$SIGN_SCRIPT" ]; then
