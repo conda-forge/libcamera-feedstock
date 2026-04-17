@@ -43,7 +43,7 @@ pin_run_as_build:
 python:
 - 3.13.* *_cp313
 qt6_main:
-- '6.10'
+- '6.11'
 sdl2:
 - '2'
 target_platform:
