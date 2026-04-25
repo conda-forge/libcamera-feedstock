@@ -23,7 +23,7 @@ gst_plugins_base:
 gstreamer:
 - '1.28'
 libboost_devel:
-- '1.88'
+- '1.90'
 libevent:
 - 2.1.12
 libjpeg_turbo:
