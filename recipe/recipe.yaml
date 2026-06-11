@@ -5,7 +5,14 @@ context:
   libcamera_rpi_version: "0.7.1+rpt20260609"
   # '+' must be percent-encoded for the GitHub release URL
   rpi_url_safe_version: ${{ libcamera_rpi_version | replace("+", "%2B") }}
-  number_base: 1
+  number_base: 2
+  # rpi_fork sorts above upstream so a bare `libcamera` dep resolves to the
+  # fork by default on aarch64 (where both variants exist); upstream stays
+  # installable explicitly via `libcamera=*=*_upstream`. The offsets also clear
+  # the previously published 0.7.1 builds (old upstream was 1+100=101), so each
+  # new variant supersedes its predecessor.
+  upstream_build_number: ${{ number_base + 100 }}
+  rpi_build_number: ${{ number_base + 200 }}
 
 recipe:
   name: libcamera
@@ -33,7 +40,7 @@ source:
         - 0002-conda-installed-paths.patch
 
 build:
-  number: ${{ number_base + 100 if variant == "upstream" else number_base }}
+  number: ${{ rpi_build_number if variant == "rpi_fork" else upstream_build_number }}
   skip:
     - not linux
     - variant == "rpi_fork" and not aarch64
@@ -121,7 +128,7 @@ outputs:
       run:
         # Can't pin exact because of the python build matrix; match the
         # version + build number + variant via the build-string glob instead.
-        - libcamera ==${{ libcamera_version }} *_${{ number_base }}_${{ variant }}
+        - libcamera ==${{ libcamera_version }} *_${{ rpi_build_number }}_${{ variant }}
     tests:
       # Metapackage: confirm it resolves the pin and co-installs the
       # matching libcamera build (the run dep lands in the test env).
