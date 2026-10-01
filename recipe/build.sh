@@ -28,11 +28,28 @@ if [[ ${variant} == "rpi_fork" ]]; then
   )
 fi
 
+# The build env also ships a python (meson depends on it), and it comes first on
+# PATH, so meson would build the bindings against it instead of the python from
+# the host env matrix. Point meson at the host python explicitly.
+# (When cross compiling, the cross file already targets the host python.)
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" != "1" ]]; then
+  cat > "${SRC_DIR}/native-python.ini" <<EOF2
+[binaries]
+python = '${PREFIX}/bin/python'
+python3 = '${PREFIX}/bin/python'
+EOF2
+  MESON_ARGS="${MESON_ARGS} --native-file ${SRC_DIR}/native-python.ini"
+fi
+
 meson setup build ${MESON_ARGS} \
      -Ddocumentation=disabled \
      "${EXTRA_MESON_ARGS[@]}"
 
 ninja -C build install
+
+# Fail the build if the bindings were not built for the host python
+PY_TAG=$("${PREFIX}/bin/python" -c "import sysconfig; print(sysconfig.get_config_var('SOABI'))")
+ls "${PREFIX}"/lib/python*/site-packages/libcamera/_libcamera.${PY_TAG}.so
 
 mkdir -p $PREFIX/etc/conda/env_vars.d
 cp $RECIPE_DIR/env_vars.json $PREFIX/etc/conda/env_vars.d/libcamera.json
