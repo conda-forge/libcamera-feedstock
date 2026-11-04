@@ -95,9 +95,11 @@ outputs:
         - libboost-devel
         - pyyaml
         - ply
-        - libpisp
-        # libpisp build dependency
-        - nlohmann_json
+        # Only the rpi/pisp pipeline uses libpisp, and libcamera only builds it on
+        # aarch64; on linux-64 it would just be an unused (overdepending) pin.
+        - if: aarch64
+          then:
+            - libpisp
       run:
         - python
     tests:
