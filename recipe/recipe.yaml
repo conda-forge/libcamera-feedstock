@@ -5,7 +5,7 @@ context:
   libcamera_rpi_version: "0.7.1+rpt20260609"
   # '+' must be percent-encoded for the GitHub release URL
   rpi_url_safe_version: ${{ libcamera_rpi_version | replace("+", "%2B") }}
-  number_base: 4
+  number_base: 5
   # rpi_fork sorts above upstream so a bare `libcamera` dep resolves to the
   # fork by default on aarch64 (where both variants exist); upstream stays
   # installable explicitly via `libcamera=*=*_upstream`. The offsets also clear
@@ -51,6 +51,16 @@ outputs:
     build:
       string: ${{ hash }}_${{ build_number }}_${{ variant }}
       script: build.sh
+      dynamic_linking:
+        # Relocate everything except the signed IPA modules: patching them
+        # would invalidate their signatures (#19). build.sh sets their RPATH
+        # and re-signs them instead.
+        binary_relocation:
+          - bin/**
+          - libexec/**
+          - lib/*.so*
+          - lib/gstreamer-1.0/**
+          - lib/python*/**
     requirements:
       # see https://git.libcamera.org/libcamera/libcamera.git/tree/meson.build?h=v0.5.1#n65
       run_exports:
@@ -69,6 +79,9 @@ outputs:
         - pyyaml
         - jinja2
         - pkg-config
+        # re-sign IPA modules after setting their RPATH (see build.sh)
+        - patchelf
+        - openssl
         - ${{ compiler('cxx') }}
         - ${{ compiler('c') }}
         - ${{ stdlib('c') }}
@@ -116,6 +129,14 @@ outputs:
           - test -d "$LIBCAMERA_IPA_MODULE_PATH"
           - test -d "$LIBCAMERA_IPA_PROXY_PATH"
           - test -d "$LIBCAMERA_IPA_CONFIG_PATH"
+      - script:
+          - python verify_ipa_signatures.py
+        files:
+          recipe:
+            - verify_ipa_signatures.py
+        requirements:
+          run:
+            - openssl
       - package_contents:
           files:
             - lib/libcamera.so
