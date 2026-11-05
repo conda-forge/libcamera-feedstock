@@ -21,11 +21,23 @@ if [[ ${variant} == "rpi_fork" ]]; then
   # in ADDITION to the rpi/pisp ones
   EXTRA_MESON_ARGS+=(
     "-Dpipelines=imx8-isi,mali-c55,rkisp1,rpi/vc4,simple,uvcvideo,rpi/pisp"
-    "-Dipas=mali-c55,rkisp1,rpi/vc4,simple,rpi/pisp"
+    # The fork renamed the soft ISP IPA 'simple' -> 'softisp' in 0.7.2+rpt
+    # (vanilla 0.7.2 still calls it 'simple').
+    "-Dipas=mali-c55,rkisp1,rpi/vc4,softisp,rpi/pisp"
     # New in 0.7.x rpi fork: the NN AWB algorithm needs tensorflow-lite, which
     # we don't package here. Pin it off (also an `auto` feature otherwise).
     "-Drpi-awb-nn=disabled"
   )
+else
+  # Upstream's default ('auto') picks every pipeline supported on the target
+  # arch. Since 0.7.2 that includes 'virtual', which needs libyuv: not on
+  # conda-forge, so meson would git-clone and vendor it during the build. Pin
+  # the pre-0.7.2 auto set instead.
+  if [[ ${target_platform} == "linux-aarch64" ]]; then
+    EXTRA_MESON_ARGS+=("-Dpipelines=imx8-isi,mali-c55,rkisp1,rpi/pisp,rpi/vc4,simple,uvcvideo")
+  else
+    EXTRA_MESON_ARGS+=("-Dpipelines=ipu3,simple,uvcvideo")
+  fi
 fi
 
 # The build env also ships a python (meson depends on it), and it comes first on
