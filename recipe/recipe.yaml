@@ -5,7 +5,7 @@ context:
   libcamera_rpi_version: "0.7.1+rpt20260609"
   # '+' must be percent-encoded for the GitHub release URL
   rpi_url_safe_version: ${{ libcamera_rpi_version | replace("+", "%2B") }}
-  number_base: 5
+  number_base: 6
   # rpi_fork sorts above upstream so a bare `libcamera` dep resolves to the
   # fork by default on aarch64 (where both variants exist); upstream stays
   # installable explicitly via `libcamera=*=*_upstream`. The offsets also clear
@@ -29,6 +29,8 @@ source:
         # When cross compiling it is important to specify this to help find libevent
         - 0001-Specify-to-use-the-prefix-include-directory-to-help-.patch
         - 0002-conda-installed-paths.patch
+        # conda-forge/libcamera-feedstock#38
+        - 0003-measure-install-prefix-path-lengths-at-runtime.patch
     else:
       # raspberrypi/libcamera#251: upstream maintain ABI compatibility, so the
       # RPi-specific changes ship as a variant rather than a separate package.
@@ -38,6 +40,8 @@ source:
         - memfd_symbols.patch
         - 0001-Specify-to-use-the-prefix-include-directory-to-help-.patch
         - 0002-conda-installed-paths.patch
+        # conda-forge/libcamera-feedstock#38
+        - 0003-measure-install-prefix-path-lengths-at-runtime.patch
 
 build:
   number: ${{ rpi_build_number if variant == "rpi_fork" else upstream_build_number }}
@@ -78,7 +82,7 @@ outputs:
         - ply
         - pyyaml
         - jinja2
-        - pkg-config
+        - pkgconf
         # re-sign IPA modules after setting their RPATH (see build.sh)
         - patchelf
         - openssl
@@ -129,6 +133,12 @@ outputs:
           - test -d "$LIBCAMERA_IPA_MODULE_PATH"
           - test -d "$LIBCAMERA_IPA_PROXY_PATH"
           - test -d "$LIBCAMERA_IPA_CONFIG_PATH"
+          # #38: compile-time install paths must survive prefix replacement.
+          # The global configuration.yaml lookup runs on every start (no camera
+          # needed); with NUL-padded paths it opens the share/libcamera
+          # directory and logs a parse error.
+          - env -u LIBCAMERA_IPA_MODULE_PATH -u LIBCAMERA_IPA_PROXY_PATH -u LIBCAMERA_IPA_CONFIG_PATH cam -l > cam.log 2>&1 || true
+          - if grep -aq "Failed to parse configuration file" cam.log; then cat cam.log; exit 1; fi
       - script:
           - python verify_ipa_signatures.py
           - python check_rpaths.py
