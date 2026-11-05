@@ -21,8 +21,8 @@ if [[ ${variant} == "rpi_fork" ]]; then
   # in ADDITION to the rpi/pisp ones
   EXTRA_MESON_ARGS+=(
     "-Dpipelines=imx8-isi,mali-c55,rkisp1,rpi/vc4,simple,uvcvideo,rpi/pisp"
-    # The fork renamed the soft ISP IPA 'simple' -> 'softisp' in 0.7.2+rpt
-    # (vanilla 0.7.2 still calls it 'simple').
+    # The soft ISP IPA is called 'softisp' (formerly 'simple'; renamed in the
+    # fork in 0.7.2+rpt and upstream in 0.8.0).
     "-Dipas=mali-c55,rkisp1,rpi/vc4,softisp,rpi/pisp"
     # New in 0.7.x rpi fork: the NN AWB algorithm needs tensorflow-lite, which
     # we don't package here. Pin it off (also an `auto` feature otherwise).
