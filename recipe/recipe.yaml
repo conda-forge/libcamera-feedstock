@@ -131,12 +131,15 @@ outputs:
           - test -d "$LIBCAMERA_IPA_CONFIG_PATH"
       - script:
           - python verify_ipa_signatures.py
+          - python check_rpaths.py
         files:
           recipe:
             - verify_ipa_signatures.py
+            - check_rpaths.py
         requirements:
           run:
             - openssl
+            - patchelf
       - package_contents:
           files:
             - lib/libcamera.so
