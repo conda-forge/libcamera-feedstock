@@ -1,11 +1,11 @@
 schema_version: 1
 
 context:
-  libcamera_version: "0.7.1"
-  libcamera_rpi_version: "0.7.1+rpt20260609"
+  libcamera_version: "0.7.2"
+  libcamera_rpi_version: "0.7.2+rpt20261009"
   # '+' must be percent-encoded for the GitHub release URL
   rpi_url_safe_version: ${{ libcamera_rpi_version | replace("+", "%2B") }}
-  number_base: 7
+  number_base: 0
   # rpi_fork sorts above upstream so a bare `libcamera` dep resolves to the
   # fork by default on aarch64 (where both variants exist); upstream stays
   # installable explicitly via `libcamera=*=*_upstream`. The offsets also clear
@@ -31,16 +31,11 @@ source:
         - 0002-conda-installed-paths.patch
         # conda-forge/libcamera-feedstock#38
         - 0003-measure-install-prefix-path-lengths-at-runtime.patch
-        # Backport of upstream cb5fcd20 (in v0.7.2): with pybind11 >=3 the
-        # custom Camera holder makes CameraManager.cameras/get raise
-        # "Unable to convert std::shared_ptr<T> to Python". The RPi fork
-        # 0.7.1+rpt20260609 already carries this commit.
-        - 0004-py-Use-smart-holder-for-Camera-if-available.patch
     else:
       # raspberrypi/libcamera#251: upstream maintain ABI compatibility, so the
       # RPi-specific changes ship as a variant rather than a separate package.
       url: https://github.com/raspberrypi/libcamera/releases/download/v${{ rpi_url_safe_version }}/libcamera-${{ rpi_url_safe_version }}.tar.xz
-      sha256: "d3078e70e73f9811ffe3c780a75a787544a95c64dbb2c85e916fde87896b3ec6"
+      sha256: "509486fc6f8bce2804202ea20c902819358f898bf34f3167d7ceb2795fc01829"
       patches:
         - memfd_symbols.patch
         - 0001-Specify-to-use-the-prefix-include-directory-to-help-.patch
