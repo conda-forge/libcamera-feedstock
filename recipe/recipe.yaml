@@ -5,7 +5,7 @@ context:
   libcamera_rpi_version: "0.7.1+rpt20260609"
   # '+' must be percent-encoded for the GitHub release URL
   rpi_url_safe_version: ${{ libcamera_rpi_version | replace("+", "%2B") }}
-  number_base: 3
+  number_base: 4
   # rpi_fork sorts above upstream so a bare `libcamera` dep resolves to the
   # fork by default on aarch64 (where both variants exist); upstream stays
   # installable explicitly via `libcamera=*=*_upstream`. The offsets also clear
@@ -95,9 +95,11 @@ outputs:
         - libboost-devel
         - pyyaml
         - ply
-        - libpisp
-        # libpisp build dependency
-        - nlohmann_json
+        # Only the rpi/pisp pipeline uses libpisp, and libcamera only builds it on
+        # aarch64; on linux-64 it would just be an unused (overdepending) pin.
+        - if: aarch64
+          then:
+            - libpisp
       run:
         - python
     tests:
