@@ -1,0 +1,130 @@
+From: Carlo Dri <carlo.dri@gmail.com>
+Subject: [PATCH] Measure install-prefix path lengths at runtime
+
+conda rewrites the build prefix embedded in binaries at install time and
+NUL-pads the rest of the original string. Where the compiler folds the
+length of a path literal at build time (std::string / std::filesystem::path
+built from IPA_CONFIG_DIR, IPA_PROXY_DIR, LIBCAMERA_DATA_DIR and
+LIBCAMERA_SYSCONF_DIR), the resulting string keeps those NULs and every
+path derived from it is truncated at the first one. As a result the global
+configuration.yaml, IPA tuning files (without LIBCAMERA_IPA_CONFIG_PATH),
+IPA proxy workers (without LIBCAMERA_IPA_PROXY_PATH) and pipeline
+configuration files were never found.
+
+Add an installPath() helper that hides the literal from the optimizer so
+the length is computed at runtime, and use it at those call sites.
+
+See conda-forge/libcamera-feedstock#38.
+---
+ include/libcamera/internal/install_path.h | 26 ++++++++++++++++++++++++++
+ src/libcamera/global_configuration.cpp    |  5 +++--
+ src/libcamera/ipa_proxy.cpp               |  5 +++--
+ src/libcamera/pipeline_handler.cpp        |  3 ++-
+ 4 files changed, 34 insertions(+), 5 deletions(-)
+
+diff --git a/include/libcamera/internal/install_path.h b/include/libcamera/internal/install_path.h
+new file mode 100644
+index 0000000..d875206
+--- /dev/null
++++ b/include/libcamera/internal/install_path.h
+@@ -0,0 +1,26 @@
++/* SPDX-License-Identifier: LGPL-2.1-or-later */
++/*
++ * Runtime view of compile-time install paths (conda-forge)
++ */
++
++#pragma once
++
++#include <string>
++
++namespace libcamera {
++
++/*
++ * conda relocates packages by rewriting the build prefix embedded in binaries
++ * at install time; the shorter install prefix is written in place and the rest
++ * of the original string is padded with NUL bytes. If the compiler folds the
++ * length of a path literal at build time, the resulting std::string keeps those
++ * NULs and every path derived from it is truncated at the first one. Hide the
++ * literal from the optimizer so that its length is measured at runtime.
++ */
++static inline std::string installPath(const char *path)
++{
++	__asm__ __volatile__("" : "+r"(path));
++	return std::string(path);
++}
++
++} /* namespace libcamera */
+diff --git a/src/libcamera/global_configuration.cpp b/src/libcamera/global_configuration.cpp
+index 46a285c..e8a35b1 100644
+--- a/src/libcamera/global_configuration.cpp
++++ b/src/libcamera/global_configuration.cpp
+@@ -20,6 +20,7 @@
+ #include <libcamera/base/log.h>
+ #include <libcamera/base/utils.h>
+ 
++#include "libcamera/internal/install_path.h"
+ #include "libcamera/internal/yaml_parser.h"
+ 
+ namespace libcamera {
+@@ -27,8 +28,8 @@ namespace libcamera {
+ namespace {
+ 
+ const std::vector<std::filesystem::path> globalConfigurationFiles = {
+-	std::filesystem::path(LIBCAMERA_SYSCONF_DIR) / "configuration.yaml",
+-	std::filesystem::path(LIBCAMERA_DATA_DIR) / "configuration.yaml",
++	std::filesystem::path(installPath(LIBCAMERA_SYSCONF_DIR)) / "configuration.yaml",
++	std::filesystem::path(installPath(LIBCAMERA_DATA_DIR)) / "configuration.yaml",
+ };
+ 
+ class EnvironmentProcessor
+diff --git a/src/libcamera/ipa_proxy.cpp b/src/libcamera/ipa_proxy.cpp
+index 83efe1d..0079d57 100644
+--- a/src/libcamera/ipa_proxy.cpp
++++ b/src/libcamera/ipa_proxy.cpp
+@@ -17,6 +17,7 @@
+ #include <libcamera/base/utils.h>
+ 
+ #include "libcamera/internal/global_configuration.h"
++#include "libcamera/internal/install_path.h"
+ #include "libcamera/internal/ipa_module.h"
+ 
+ /**
+@@ -81,7 +82,7 @@ std::string ipaConfigurationFile(const std::string &ipaName, const std::string &
+ 
+ 	} else {
+ 		/* Else look in the system locations. */
+-		for (const auto &dir : utils::split(IPA_CONFIG_DIR, ":")) {
++		for (const auto &dir : utils::split(installPath(IPA_CONFIG_DIR), ":")) {
+ 			std::string confPath = dir + "/" + ipaName + "/" + name;
+ 			ret = stat(confPath.c_str(), &statbuf);
+ 			if (ret == 0 && (statbuf.st_mode & S_IFMT) == S_IFREG)
+@@ -250,7 +251,7 @@ std::string IPAProxy::resolvePath(const std::string &file) const
+ 	}
+ 
+ 	/* Else try finding the exec target from the install directory. */
+-	std::string proxyPath = std::string(IPA_PROXY_DIR) + proxyFile;
++	std::string proxyPath = installPath(IPA_PROXY_DIR) + proxyFile;
+ 	if (!access(proxyPath.c_str(), X_OK))
+ 		return proxyPath;
+ 
+diff --git a/src/libcamera/pipeline_handler.cpp b/src/libcamera/pipeline_handler.cpp
+index e7145c1..bc65165 100644
+--- a/src/libcamera/pipeline_handler.cpp
++++ b/src/libcamera/pipeline_handler.cpp
+@@ -22,6 +22,7 @@
+ #include "libcamera/internal/camera.h"
+ #include "libcamera/internal/camera_manager.h"
+ #include "libcamera/internal/device_enumerator.h"
++#include "libcamera/internal/install_path.h"
+ #include "libcamera/internal/media_device.h"
+ #include "libcamera/internal/request.h"
+ #include "libcamera/internal/tracepoints.h"
+@@ -659,7 +660,7 @@ std::string PipelineHandler::configurationFile(const std::string &subdir,
+ 			<< confPath << "'";
+ 	} else {
+ 		/* Else look in the system locations. */
+-		confPath = std::string(LIBCAMERA_DATA_DIR)
++		confPath = installPath(LIBCAMERA_DATA_DIR)
+ 				+ "/pipeline/" + subdir + '/' + name;
+ 	}
+ 
