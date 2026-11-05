@@ -47,6 +47,19 @@ meson setup build ${MESON_ARGS} \
 
 ninja -C build install
 
+# IPA modules are signed at install time, and libcamera only loads modules
+# whose signature verifies in-process; the others run isolated in a proxy
+# worker process (conda-forge/libcamera-feedstock#19). rattler-build's RPATH
+# relocation would modify the modules after signing, so they are excluded from
+# it (see build.dynamic_linking.binary_relocation in recipe.yaml). Set the RPATH
+# ourselves (the env's lib/ dir) and then re-sign with the build's private key.
+# --force-rpath writes DT_RPATH: rattler-build rewrites DT_RUNPATH to DT_RPATH
+# even in files excluded from relocation, which would break the signature again.
+for module in "${PREFIX}"/lib/libcamera/ipa/*.so; do
+  patchelf --force-rpath --set-rpath '$ORIGIN/../..' "${module}"
+  openssl dgst -sha256 -sign build/src/ipa-priv-key.pem -out "${module}.sign" "${module}"
+done
+
 # Fail the build if the bindings were not built for the host python
 PY_TAG=$("${PREFIX}/bin/python" -c "import sysconfig; print(sysconfig.get_config_var('SOABI'))")
 ls "${PREFIX}"/lib/python*/site-packages/libcamera/_libcamera.${PY_TAG}.so
