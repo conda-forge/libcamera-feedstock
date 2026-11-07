@@ -27,7 +27,7 @@ gstreamer:
 libboost_devel:
 - '1.90'
 libevent:
-- 2.1.12
+- 2.1.13
 libjpeg_turbo:
 - '3'
 libtiff:

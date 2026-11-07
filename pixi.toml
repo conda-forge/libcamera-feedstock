@@ -4,10 +4,10 @@
 "$schema" = "https://pixi.sh/v0.59.0/schema/manifest/schema.json"
 
 [workspace]
-name = "libcamera-wt-feedstock"
-version = "2026.10.24"  # conda-smithy version used to generate this file
-description = "Pixi configuration for conda-forge/libcamera-wt-feedstock"
-authors = ["@conda-forge/libcamera-wt"]
+name = "libcamera-feedstock"
+version = "2026.11.6"  # conda-smithy version used to generate this file
+description = "Pixi configuration for conda-forge/libcamera-feedstock"
+authors = ["@conda-forge/libcamera"]
 channels = ["conda-forge"]
 platforms = ["linux-64", "linux-aarch64", "osx-64", "win-64"]
 requires-pixi = ">=0.59.0"
@@ -29,6 +29,7 @@ description = "Lint the feedstock recipe"
 [feature.build.dependencies]
 conda-build = ">=26.3"
 conda-forge-ci-setup = "4.*"
+python = "3.14.*"
 rattler-build = "*"
 
 [feature.build.tasks.inspect-all]
@@ -36,70 +37,70 @@ cmd = "inspect_artifacts --all-packages"
 description = "List contents of all packages found in rattler-build build directory."
 [feature.build.tasks.build]
 cmd = "rattler-build build --recipe recipe"
-description = "Build libcamera-wt-feedstock directly (without setup scripts), no particular variant specified"
+description = "Build libcamera-feedstock directly (without setup scripts), no particular variant specified"
 [feature.build.tasks."build-linux_64_python3.11.____cpythonvariantupstream"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_python3.11.____cpythonvariantupstream.yaml --target-platform linux-64"
-description = "Build libcamera-wt-feedstock with variant linux_64_python3.11.____cpythonvariantupstream directly (without setup scripts)"
+description = "Build libcamera-feedstock with variant linux_64_python3.11.____cpythonvariantupstream directly (without setup scripts)"
 [feature.build.tasks."debug-linux_64_python3.11.____cpythonvariantupstream"]
 cmd = "rattler-build debug setup --recipe recipe -m .ci_support/linux_64_python3.11.____cpythonvariantupstream.yaml --target-platform linux-64"
-description = "Debug libcamera-wt-feedstock with variant linux_64_python3.11.____cpythonvariantupstream directly (without setup scripts)"
+description = "Debug libcamera-feedstock with variant linux_64_python3.11.____cpythonvariantupstream directly (without setup scripts)"
 [feature.build.tasks."inspect-linux_64_python3.11.____cpythonvariantupstream"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_python3.11.____cpythonvariantupstream.yaml"
-description = "List contents of libcamera-wt-feedstock packages built for variant linux_64_python3.11.____cpythonvariantupstream"
+description = "List contents of libcamera-feedstock packages built for variant linux_64_python3.11.____cpythonvariantupstream"
 [feature.build.tasks."build-linux_64_python3.12.____cpythonvariantupstream"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_python3.12.____cpythonvariantupstream.yaml --target-platform linux-64"
-description = "Build libcamera-wt-feedstock with variant linux_64_python3.12.____cpythonvariantupstream directly (without setup scripts)"
+description = "Build libcamera-feedstock with variant linux_64_python3.12.____cpythonvariantupstream directly (without setup scripts)"
 [feature.build.tasks."debug-linux_64_python3.12.____cpythonvariantupstream"]
 cmd = "rattler-build debug setup --recipe recipe -m .ci_support/linux_64_python3.12.____cpythonvariantupstream.yaml --target-platform linux-64"
-description = "Debug libcamera-wt-feedstock with variant linux_64_python3.12.____cpythonvariantupstream directly (without setup scripts)"
+description = "Debug libcamera-feedstock with variant linux_64_python3.12.____cpythonvariantupstream directly (without setup scripts)"
 [feature.build.tasks."inspect-linux_64_python3.12.____cpythonvariantupstream"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_python3.12.____cpythonvariantupstream.yaml"
-description = "List contents of libcamera-wt-feedstock packages built for variant linux_64_python3.12.____cpythonvariantupstream"
+description = "List contents of libcamera-feedstock packages built for variant linux_64_python3.12.____cpythonvariantupstream"
 [feature.build.tasks."build-linux_64_python3.13.____cp313variantupstream"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_python3.13.____cp313variantupstream.yaml --target-platform linux-64"
-description = "Build libcamera-wt-feedstock with variant linux_64_python3.13.____cp313variantupstream directly (without setup scripts)"
+description = "Build libcamera-feedstock with variant linux_64_python3.13.____cp313variantupstream directly (without setup scripts)"
 [feature.build.tasks."debug-linux_64_python3.13.____cp313variantupstream"]
 cmd = "rattler-build debug setup --recipe recipe -m .ci_support/linux_64_python3.13.____cp313variantupstream.yaml --target-platform linux-64"
-description = "Debug libcamera-wt-feedstock with variant linux_64_python3.13.____cp313variantupstream directly (without setup scripts)"
+description = "Debug libcamera-feedstock with variant linux_64_python3.13.____cp313variantupstream directly (without setup scripts)"
 [feature.build.tasks."inspect-linux_64_python3.13.____cp313variantupstream"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_python3.13.____cp313variantupstream.yaml"
-description = "List contents of libcamera-wt-feedstock packages built for variant linux_64_python3.13.____cp313variantupstream"
+description = "List contents of libcamera-feedstock packages built for variant linux_64_python3.13.____cp313variantupstream"
 [feature.build.tasks."build-linux_64_python3.14.____cp314variantupstream"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_python3.14.____cp314variantupstream.yaml --target-platform linux-64"
-description = "Build libcamera-wt-feedstock with variant linux_64_python3.14.____cp314variantupstream directly (without setup scripts)"
+description = "Build libcamera-feedstock with variant linux_64_python3.14.____cp314variantupstream directly (without setup scripts)"
 [feature.build.tasks."debug-linux_64_python3.14.____cp314variantupstream"]
 cmd = "rattler-build debug setup --recipe recipe -m .ci_support/linux_64_python3.14.____cp314variantupstream.yaml --target-platform linux-64"
-description = "Debug libcamera-wt-feedstock with variant linux_64_python3.14.____cp314variantupstream directly (without setup scripts)"
+description = "Debug libcamera-feedstock with variant linux_64_python3.14.____cp314variantupstream directly (without setup scripts)"
 [feature.build.tasks."inspect-linux_64_python3.14.____cp314variantupstream"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_python3.14.____cp314variantupstream.yaml"
-description = "List contents of libcamera-wt-feedstock packages built for variant linux_64_python3.14.____cp314variantupstream"
+description = "List contents of libcamera-feedstock packages built for variant linux_64_python3.14.____cp314variantupstream"
 [feature.build.tasks."build-linux_64_python3.15.____cp315variantupstream"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_python3.15.____cp315variantupstream.yaml --target-platform linux-64"
-description = "Build libcamera-wt-feedstock with variant linux_64_python3.15.____cp315variantupstream directly (without setup scripts)"
+description = "Build libcamera-feedstock with variant linux_64_python3.15.____cp315variantupstream directly (without setup scripts)"
 [feature.build.tasks."debug-linux_64_python3.15.____cp315variantupstream"]
 cmd = "rattler-build debug setup --recipe recipe -m .ci_support/linux_64_python3.15.____cp315variantupstream.yaml --target-platform linux-64"
-description = "Debug libcamera-wt-feedstock with variant linux_64_python3.15.____cp315variantupstream directly (without setup scripts)"
+description = "Debug libcamera-feedstock with variant linux_64_python3.15.____cp315variantupstream directly (without setup scripts)"
 [feature.build.tasks."inspect-linux_64_python3.15.____cp315variantupstream"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_python3.15.____cp315variantupstream.yaml"
-description = "List contents of libcamera-wt-feedstock packages built for variant linux_64_python3.15.____cp315variantupstream"
+description = "List contents of libcamera-feedstock packages built for variant linux_64_python3.15.____cp315variantupstream"
 [feature.build.tasks."build-linux_aarch64_variantrpi_fork"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_variantrpi_fork.yaml --target-platform linux-aarch64"
-description = "Build libcamera-wt-feedstock with variant linux_aarch64_variantrpi_fork directly (without setup scripts)"
+description = "Build libcamera-feedstock with variant linux_aarch64_variantrpi_fork directly (without setup scripts)"
 [feature.build.tasks."debug-linux_aarch64_variantrpi_fork"]
 cmd = "rattler-build debug setup --recipe recipe -m .ci_support/linux_aarch64_variantrpi_fork.yaml --target-platform linux-aarch64"
-description = "Debug libcamera-wt-feedstock with variant linux_aarch64_variantrpi_fork directly (without setup scripts)"
+description = "Debug libcamera-feedstock with variant linux_aarch64_variantrpi_fork directly (without setup scripts)"
 [feature.build.tasks."inspect-linux_aarch64_variantrpi_fork"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_variantrpi_fork.yaml"
-description = "List contents of libcamera-wt-feedstock packages built for variant linux_aarch64_variantrpi_fork"
+description = "List contents of libcamera-feedstock packages built for variant linux_aarch64_variantrpi_fork"
 [feature.build.tasks."build-linux_aarch64_variantupstream"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_variantupstream.yaml --target-platform linux-aarch64"
-description = "Build libcamera-wt-feedstock with variant linux_aarch64_variantupstream directly (without setup scripts)"
+description = "Build libcamera-feedstock with variant linux_aarch64_variantupstream directly (without setup scripts)"
 [feature.build.tasks."debug-linux_aarch64_variantupstream"]
 cmd = "rattler-build debug setup --recipe recipe -m .ci_support/linux_aarch64_variantupstream.yaml --target-platform linux-aarch64"
-description = "Debug libcamera-wt-feedstock with variant linux_aarch64_variantupstream directly (without setup scripts)"
+description = "Debug libcamera-feedstock with variant linux_aarch64_variantupstream directly (without setup scripts)"
 [feature.build.tasks."inspect-linux_aarch64_variantupstream"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_variantupstream.yaml"
-description = "List contents of libcamera-wt-feedstock packages built for variant linux_aarch64_variantupstream"
+description = "List contents of libcamera-feedstock packages built for variant linux_aarch64_variantupstream"
 
 [environments]
 build = ["build"]
